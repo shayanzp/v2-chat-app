@@ -48,6 +48,9 @@ io.on('connection', (socket) => {
 
         const user = getUser(socket.id)
 
+        if (!user) {
+            return callback('User not Found! ')
+        }
         io.to(user.room).emit('message', generateMessage(user.username, message))
         callback()
     })
